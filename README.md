@@ -62,6 +62,3 @@ This command builds the project and pushes the `dist` folder to the `gh-pages` b
 **Juan Barbosa**
 - GitHub: [@JuanBarbosaA](https://github.com/JuanBarbosaA)
 - LinkedIn: [Juan Barbosa](https://www.linkedin.com/in/juanbarbosavella/)
-
----
-*Built with ❤️ using React & Tailwind CSS*
