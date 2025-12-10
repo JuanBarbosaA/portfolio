@@ -25,7 +25,7 @@ const Footer = () => {
             className="text-2xl font-display font-bold text-gradient"
             whileHover={{ scale: 1.05 }}
           >
-            JB
+
           </motion.a>
 
           {/* Navigation */}
@@ -44,8 +44,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <p className="text-sm text-muted-foreground flex items-center gap-1">
-            © {currentYear} Made with{" "}
-            <Heart className="w-4 h-4 text-primary fill-primary animate-pulse" /> by Juan Barbosa
+            By Juan Barbosa
           </p>
         </div>
       </div>

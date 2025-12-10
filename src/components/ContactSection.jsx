@@ -1,7 +1,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Send, Mail, MapPin, Phone, Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Send, Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
 
 const ContactSection = () => {
   const ref = useRef(null);
@@ -17,50 +18,81 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      await emailjs.send(
+        "service_jkx15hg",
+        "template_dadu41l",
+        formData,
+        "HP0f7Yw7QZVsRdHnx"
+      );
 
-    toast.success("Message sent successfully! I'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
-    setIsSubmitting(false);
+      toast.success("Message sent successfully! I'll get back to you soon.");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      toast.error("Something went wrong. Please try again.");
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
-  const UpworkIcon = ({ className }) => (
-    <svg
-      className={`${className} fill-current`}
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      role="img"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z" />
-    </svg>
-  );
 
 
+  const getWhatsappLink = () => {
+    const lang = navigator.language || "es";
+    const messages = {
+      es: "Hola Juan, estoy interesado en tus servicios de desarrollo web. ¿Podemos conversar sobre un proyecto?",
+      en: "Hi Juan, I am interested in your web development services. Can we discuss a project?",
+    };
+    const message = messages[lang.startsWith("en") ? "en" : "es"];
+    const encodedMessage = encodeURIComponent(message);
+    return `https://wa.me/573213225792?text=${encodedMessage}`;
+  };
 
   const contactInfo = [
-    { icon: Mail, label: "Email", value: "juanbarbosavella@gmail.com", href: "mailto:juanbarbosavella@gmail.com" },
-    { icon: Phone, label: "Phone", value: "+57 3213225792", href: "tel:+573213225792" },
-    { icon: MapPin, label: "Location", value: "Bogotá, Colombia", href: "#" },
+    {
+      icon: Mail,
+      label: "Email",
+      value: "juanbarbosavella@gmail.com",
+      href: "mailto:juanbarbosavella@gmail.com",
+    },
+    {
+      icon: Phone,
+      label: "WhatsApp",
+      value: "+57 3213225792",
+      href: getWhatsappLink(),
+    },
+    {
+      icon: MapPin,
+      label: "Location",
+      value: "Bogotá, Colombia",
+      href: "https://www.google.com/maps/search/?api=1&query=Bogotá+Colombia",
+      target: "_blank"
+    }
+
   ];
 
+  const UpworkIcon = ({ className }) => (<svg className={className} fill-current width="24" fill="white" height="24" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" > <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z" /> </svg>);
+
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub", value: "https://github.com/JuanBarbosaA", title: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn", value: "https://www.linkedin.com/in/juanbarbosavella/", title: "LinkedIn" },
-    { icon: UpworkIcon, href: "#", label: "Upwork", value: "https://www.upwork.com/freelancers/juanb35", title: "Upwork" },
+    { icon: Github, href: "https://github.com/JuanBarbosaA", label: "GitHub", value: "https://github.com/JuanBarbosaA", title: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/juanbarbosavella/", label: "LinkedIn", value: "https://www.linkedin.com/in/juanbarbosavella/", title: "LinkedIn" },
+    { icon: UpworkIcon, href: "https://www.upwork.com/freelancers/juanb35", label: "Upwork", value: "https://www.upwork.com/freelancers/juanb35", title: "Upwork" }
   ];
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden" ref={ref}>
+    <section
+      id="contact"
+      className="section-padding relative overflow-hidden"
+      ref={ref}
+    >
       {/* Background elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-gradient-radial opacity-30" />
 
@@ -101,13 +133,17 @@ const ContactSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h3 className="text-2xl font-display font-semibold mb-8">Contact Information</h3>
+            <h3 className="text-2xl font-display font-semibold mb-8">
+              Contact Information
+            </h3>
 
             <div className="space-y-6 mb-10">
               {contactInfo.map((item, index) => (
                 <motion.a
                   key={item.label}
                   href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
@@ -118,7 +154,9 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">{item.label}</p>
-                    <p className="font-medium group-hover:text-primary transition-colors">{item.value}</p>
+                    <p className="font-medium group-hover:text-primary transition-colors">
+                      {item.value}
+                    </p>
                   </div>
                 </motion.a>
               ))}
@@ -132,6 +170,8 @@ const ContactSection = () => {
                     key={item.label}
                     href={item.href}
                     title={item.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     initial={{ opacity: 0, scale: 0 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
@@ -187,7 +227,10 @@ const ContactSection = () => {
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium mb-2"
+              >
                 Message
               </label>
               <textarea

@@ -28,9 +28,8 @@ const Navigation = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "glass-strong py-4" : "py-6"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "glass-strong py-4" : "py-6"
+          }`}
       >
         <div className="container mx-auto px-6">
           <nav className="flex items-center justify-between">
@@ -89,7 +88,7 @@ const Navigation = () => {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-0 z-40 md:hidden"
           >
-            <div 
+            <div
               className="absolute inset-0 bg-background/95 backdrop-blur-xl"
               onClick={() => setIsMobileMenuOpen(false)}
             />

@@ -197,7 +197,7 @@ const ProjectModal = ({
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ type: "spring", duration: 0.5 }}
-        className="relative w-full max-w-4xl glass-strong rounded-3xl overflow-hidden"
+        className="relative w-full max-w-4xl max-h-[90vh] glass-strong rounded-3xl overflow-hidden flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
@@ -228,12 +228,14 @@ const ProjectModal = ({
 
         {/* Image */}
         <div
-          className="aspect-video w-full"
+          className="h-60 sm:h-72 md:h-80 w-full flex-shrink-0"
           style={{ background: project.image }}
         />
 
-        {/* Content */}
-        <div className="p-8">
+        {/* Scrollable content */}
+        <div className="p-8 overflow-y-auto flex-1 relative">
+          {/* Scroll hint: gradient bottom */}
+          <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-background/90 to-transparent pointer-events-none" />
           <h3 className="text-3xl font-display font-bold mb-2">{project.title}</h3>
           <p className="text-muted-foreground mb-6">{project.longDescription}</p>
 
@@ -279,6 +281,7 @@ const ProjectModal = ({
     </motion.div>
   );
 };
+
 
 const PortfolioSection = () => {
   const ref = useRef(null);

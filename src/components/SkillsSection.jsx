@@ -1,15 +1,18 @@
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import {
   Layout,
   Server,
   Terminal,
   Palette,
+  Code,
+  HeartHandshake,
   Database,
   Globe,
   Cpu,
   Layers
 } from "lucide-react";
+
 
 const TechCategory = ({ title, icon: Icon, skills, delay, isInView }) => {
   return (
@@ -52,24 +55,126 @@ const SkillsSection = () => {
     {
       title: "Frontend",
       icon: Layout,
-      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"]
+      skills: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript (ES6+)",
+        "HTML5",
+        "CSS3",
+        "SASS",
+        "JSX",
+        "Tailwind CSS",
+        "Bootstrap",
+        "Material UI",
+        "Chakra UI",
+        "Headless UI",
+        "Framer Motion",
+        "React Query",
+        "Zustand / Context API",
+        "Accessibility (A11y)",
+        "Responsive Design",
+        "Component Architecture",
+        "Vite",
+        "Prettier",
+        "WordPress",
+        "WooCommerce",
+        "Elementor",
+        "Shopify",
+        "Wix"
+      ]
     },
     {
       title: "Backend",
       icon: Server,
-      skills: ["Node.js", "Express", "PostgreSQL", "MongoDB", "GraphQL", "Prisma"]
+      skills: [
+        "Node.js",
+        "Express",
+        "REST APIs",
+        "GraphQL",
+        "PostgreSQL",
+        "MongoDB",
+        "MySQL",
+        "Prisma",
+        "Mongoose",
+        "JWT Authentication",
+        "OAuth",
+        "WebSockets",
+        "tRPC",
+        "ORM",
+        "ODM"
+      ]
+    },
+    {
+      title: "Full-Stack",
+      icon: Code,
+      skills: [
+        "Next.js Full-Stack Development",
+        "API Routes",
+        "Server Actions",
+        "Database Modeling",
+        "Authentication (NextAuth, JWT)",
+        "Monorepos (Turborepo)",
+        "Microservices Basics",
+        "State Management",
+        "Performance Optimization",
+        "Testing (Vitest / Jest)"
+      ]
     },
     {
       title: "Tools & DevOps",
       icon: Terminal,
-      skills: ["Git", "Docker", "AWS", "Vercel", "CI/CD"]
+      skills: [
+        "Git",
+        "GitHub",
+        "Docker",
+        "AWS",
+        "Vercel",
+        "Netlify",
+        "CI/CD",
+        "Linux",
+        "Postman",
+        "Cloudflare",
+        "Nginx",
+        "PM2",
+        "Command Line Tools"
+      ]
     },
     {
       title: "Design",
       icon: Palette,
-      skills: ["Figma", "UI/UX", "Prototyping"]
+      skills: [
+        "Figma",
+        "UI/UX Design",
+        "Wireframing",
+        "Prototyping",
+        "Design Systems",
+        "Layouts",
+        "Color Palettes",
+        "Typography",
+        "Component Libraries",
+        "Adobe XD"
+      ]
+    },
+    {
+      title: "Soft Skills",
+      icon: HeartHandshake,
+      skills: [
+        "Communication",
+        "Team Collaboration",
+        "Problem Solving",
+        "Time Management",
+        "Adaptability",
+        "Critical Thinking",
+        "Attention to Detail",
+        "Client Communication",
+        "Leadership",
+        "Project Ownership",
+        "Fast Learning"
+      ]
     }
   ];
+
 
   return (
     <section id="skills" className="section-padding relative overflow-hidden" ref={ref}>

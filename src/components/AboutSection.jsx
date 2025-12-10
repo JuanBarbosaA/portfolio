@@ -66,7 +66,7 @@ const AboutSection = () => {
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 5, repeat: Infinity }}
               >
-                <span className="text-accent font-semibold">30+ Projects</span>
+                <span className="text-accent font-semibold">50+ Projects</span>
               </motion.div>
             </div>
           </motion.div>
