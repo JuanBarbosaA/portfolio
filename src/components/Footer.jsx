@@ -20,12 +20,13 @@ const Footer = () => {
       <div className="container mx-auto relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo / Name */}
+
           <motion.a
             href="#"
             className="text-2xl font-display font-bold text-gradient"
             whileHover={{ scale: 1.05 }}
           >
-
+            JB
           </motion.a>
 
           {/* Navigation */}
