@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Send, Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
@@ -7,6 +7,7 @@ import emailjs from "@emailjs/browser";
 const ContactSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [lang, setLang] = useState("en");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,10 +15,57 @@ const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+
+  useEffect(() => {
+    const userLang = navigator.language || navigator.userLanguage;
+    setLang(userLang.startsWith("es") ? "es" : "en")
+  })
+
+
+  const translations = {
+    en: {
+      header: "Get In Touch",
+      title: "Let's Work",
+      subtitle: "Together",
+      location: "Location",
+      description: "Have a project in mind or just want to chat? Feel free to reach out. I'm always open to discussing new opportunities.",
+      contactInfo: "Contact Information",
+      followMe: "Follow Me",
+      name: "Name",
+      email: "Email",
+      message: "Message",
+      namePlaceholder: "Your name",
+      emailPlaceholder: "your@email.com",
+      messagePlaceholder: "Tell me about your project...",
+      sendMessage: "Send Message",
+      successMessage: "Message sent successfully! I'll get back to you soon.",
+      errorMessage: "Something went wrong. Please try again.",
+      whatsappMsg: "Hi Juan, I am interested in your web development services. Can we discuss a project?"
+    },
+    es: {
+      header: "Contáctame",
+      title: "Trabajemos",
+      subtitle: "Juntos",
+      location: "Ubicación",
+      description: "¿Tienes un proyecto en mente o solo quieres charlar? No dudes en escribirme. Siempre estoy abierto a nuevas oportunidades.",
+      contactInfo: "Información de Contacto",
+      followMe: "Sígueme",
+      name: "Nombre",
+      email: "Correo",
+      message: "Mensaje",
+      namePlaceholder: "Tu nombre",
+      emailPlaceholder: "tu@correo.com",
+      messagePlaceholder: "Cuéntame sobre tu proyecto...",
+      sendMessage: "Enviar Mensaje",
+      successMessage: "¡Mensaje enviado con éxito! Te responderé pronto.",
+      errorMessage: "Algo salió mal. Por favor, inténtalo de nuevo.",
+      whatsappMsg: "Hola Juan, estoy interesado en tus servicios de desarrollo web. ¿Podemos conversar sobre un proyecto?"
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
       await emailjs.send(
         "service_jkx15hg",
@@ -25,11 +73,10 @@ const ContactSection = () => {
         formData,
         "HP0f7Yw7QZVsRdHnx"
       );
-
-      toast.success("Message sent successfully! I'll get back to you soon.");
+      toast.success(translations[lang].successMessage);
       setFormData({ name: "", email: "", message: "" });
     } catch (err) {
-      toast.error("Something went wrong. Please try again.");
+      toast.error(translations[lang].errorMessage);
       console.error(err);
     } finally {
       setIsSubmitting(false);
@@ -37,29 +84,18 @@ const ContactSection = () => {
   };
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-
-
   const getWhatsappLink = () => {
-    const lang = navigator.language || "es";
-    const messages = {
-      es: "Hola Juan, estoy interesado en tus servicios de desarrollo web. ¿Podemos conversar sobre un proyecto?",
-      en: "Hi Juan, I am interested in your web development services. Can we discuss a project?",
-    };
-    const message = messages[lang.startsWith("en") ? "en" : "es"];
-    const encodedMessage = encodeURIComponent(message);
-    return `https://wa.me/573213225792?text=${encodedMessage}`;
+    const message = translations[lang].whatsappMsg;
+    return `https://wa.me/573213225792?text=${encodeURIComponent(message)}`;
   };
 
   const contactInfo = [
     {
       icon: Mail,
-      label: "Email",
+      label: translations[lang].email,
       value: "juanbarbosavella@gmail.com",
       href: "mailto:juanbarbosavella@gmail.com",
     },
@@ -71,7 +107,7 @@ const ContactSection = () => {
     },
     {
       icon: MapPin,
-      label: "Location",
+      label: translations[lang].location,
       value: "Bogotá, Colombia",
       href: "https://www.google.com/maps/search/?api=1&query=Bogotá+Colombia",
       target: "_blank"
@@ -105,7 +141,7 @@ const ContactSection = () => {
             transition={{ duration: 0.5 }}
             className="text-primary font-medium mb-4 block"
           >
-            Get In Touch
+            {translations[lang].header}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -113,7 +149,7 @@ const ContactSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl font-display font-bold mb-4"
           >
-            Let's Work <span className="text-gradient">Together</span>
+            {translations[lang].title} <span className="text-gradient">{translations[lang].subtitle}</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -121,8 +157,7 @@ const ContactSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-muted-foreground max-w-2xl mx-auto"
           >
-            Have a project in mind or just want to chat? Feel free to reach out.
-            I'm always open to discussing new opportunities.
+            {translations[lang].description}
           </motion.p>
         </div>
 
@@ -134,7 +169,7 @@ const ContactSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <h3 className="text-2xl font-display font-semibold mb-8">
-              Contact Information
+              {translations[lang].contactInfo}
             </h3>
 
             <div className="space-y-6 mb-10">
@@ -163,7 +198,7 @@ const ContactSection = () => {
             </div>
 
             <div>
-              <h4 className="text-lg font-medium mb-4">Follow Me</h4>
+              <h4 className="text-lg font-medium mb-4">{translations[lang].followMe}</h4>
               <div className="flex gap-4">
                 {socialLinks.map((item, index) => (
                   <motion.a
@@ -196,7 +231,7 @@ const ContactSection = () => {
           >
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-2">
-                Name
+                {translations[lang].name}
               </label>
               <input
                 type="text"
@@ -206,13 +241,13 @@ const ContactSection = () => {
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-3 rounded-xl bg-input border border-border focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                placeholder="Your name"
+                placeholder={translations[lang].namePlaceholder}
               />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Email
+                {translations[lang].email}
               </label>
               <input
                 type="email"
@@ -222,7 +257,7 @@ const ContactSection = () => {
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-3 rounded-xl bg-input border border-border focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                placeholder="your@email.com"
+                placeholder={translations[lang].emailPlaceholder}
               />
             </div>
 
@@ -231,7 +266,7 @@ const ContactSection = () => {
                 htmlFor="message"
                 className="block text-sm font-medium mb-2"
               >
-                Message
+                {translations[lang].message}
               </label>
               <textarea
                 id="message"
@@ -241,7 +276,7 @@ const ContactSection = () => {
                 required
                 rows={5}
                 className="w-full px-4 py-3 rounded-xl bg-input border border-border focus:border-primary/50 focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
-                placeholder="Tell me about your project..."
+                placeholder={translations[lang].messagePlaceholder}
               />
             </div>
 
@@ -256,7 +291,7 @@ const ContactSection = () => {
                 <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
               ) : (
                 <>
-                  Send Message
+                  {translations[lang].sendMessage}
                   <Send className="w-4 h-4" />
                 </>
               )}

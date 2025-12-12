@@ -5,6 +5,33 @@ import { Menu, X } from "lucide-react";
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [lang, setLang] = useState("en");
+
+  useEffect(() => {
+    const userLang = navigator.language || navigator.userLanguage;
+    if (userLang.startsWith("es")) setLang("es");
+    else setLang("en");
+  }, []);
+
+  const translations = {
+    en: {
+      home: "Home",
+      about: "About",
+      skills: "Skills",
+      portfolio: "Portfolio",
+      contact: "Contact",
+      hireMe: "Hire Me",
+    },
+    es: {
+      home: "Inicio",
+      about: "Sobre Mí",
+      skills: "Habilidades",
+      portfolio: "Portafolio",
+      contact: "Contacto",
+      hireMe: "Contrátame",
+    },
+  };
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,11 +42,11 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { label: "Home", href: "#" },
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Contact", href: "#contact" },
+    { label: translations[lang].home, href: "#" },
+    { label: translations[lang].about, href: "#about" },
+    { label: translations[lang].skills, href: "#skills" },
+    { label: translations[lang].portfolio, href: "#portfolio" },
+    { label: translations[lang].contact, href: "#contact" },
   ];
 
   return (
@@ -64,7 +91,7 @@ const Navigation = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Hire Me
+              {translations[lang].hireMe}
             </motion.a>
 
             {/* Mobile Menu Button */}

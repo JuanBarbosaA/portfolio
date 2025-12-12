@@ -1,111 +1,170 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
-import { ExternalLink, Github, X, ChevronLeft, ChevronRight } from "lucide-react";
-
-
+import { ExternalLink, Github, X, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import drink1 from "../assets/projects/drink1.jpg";
+import interpreters from "../assets/projects/interpreters.png";
+import goblin from "../assets/projects/goblin.png";
+import game from "../assets/projects/game.png";
+import creativist from "../assets/projects/creativist.png";
+import gallery from "../assets/projects/gallery.png";
+import golf from "../assets/projects/golf.png";
+import tonni from "../assets/projects/tonni.png";
+import calendly from "../assets/projects/calendly.png";
+import giphy from "../assets/projects/giphy.png";
+import fitmatch from "../assets/projects/fitmatch.png";
+import dibujo from "../assets/projects/dibujo.png";
 
 const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "Modern shopping experience with React",
-    longDescription: "A full-featured e-commerce platform built with React, featuring real-time inventory, secure payments, and an intuitive admin dashboard. Implemented advanced filtering, search functionality, and personalized recommendations.",
-    image: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    tags: ["React", "Node.js", "MongoDB", "Stripe"],
-    liveUrl: "#",
+    title: "Drink Yahweh",
+    description: "Modern e-commerce experience built with WordPress",
+    longDescription:
+      "A mobile-first WooCommerce store built on WordPress with custom design, branded animations, API shipping integration, and performance optimization. Delivered a fast, secure, and visually engaging shopping experience across mobile and desktop.",
+    image: drink1,
+    tags: ["WordPress", "WooCommerce", "Elementor", "CSS", "PHP", "API", "MySQL"],
+    liveUrl: "https://drinkyahweh.com/",
     githubUrl: "#",
     color: "from-violet-500/20 to-purple-500/20"
   },
+
   {
     id: 2,
-    title: "AI Dashboard",
-    description: "Data visualization & analytics",
-    longDescription: "An intelligent dashboard for monitoring AI models and visualizing complex data. Features real-time metrics, customizable charts, and automated reporting capabilities.",
-    image: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-    tags: ["TypeScript", "D3.js", "TensorFlow", "AWS"],
-    liveUrl: "#",
+    title: "Design Agency Website",
+    description: "Custom WordPress portfolio website",
+    longDescription:
+      "Customized and implemented the Tonni WordPress theme for a design agency, creating a modern and responsive portfolio site. Built multiple pages with Elementor, configured global styles, optimized images, and refined layouts to match the brand’s visual identity.",
+    image: tonni,
+    tags: ["WordPress", "Elementor", "Theme Customization", "CSS", "PHP"],
+    liveUrl: "https://petero86.sg-host.com/",
     githubUrl: "#",
-    color: "from-pink-500/20 to-rose-500/20"
+    color: "from-indigo-500/20 to-violet-500/20"
   },
   {
     id: 3,
-    title: "Social Media App",
-    description: "Real-time social networking",
-    longDescription: "A modern social platform with real-time messaging, story sharing, and live streaming capabilities. Built with scalability in mind using microservices architecture.",
-    image: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-    tags: ["Next.js", "GraphQL", "PostgreSQL", "Redis"],
+    title: "DC Interpreters – Landing Page",
+    description: "Responsive WordPress landing page",
+    longDescription:
+      "Developed a professional one-page WordPress landing site for a Washington D.C. language services company. Built the full layout with Elementor following the Adobe XD design, optimized performance, improved mobile responsiveness, and implemented a clean contact form to increase conversions.",
+    image: interpreters,
+    tags: ["WordPress", "Elementor", "Landing Page", "CSS", "PHP"],
+    liveUrl: "https://dcinterpreters.net/",
+    githubUrl: "#",
+    color: "from-pink-500/20 to-rose-500/20"
+  },
+
+  {
+    id: 4,
+    title: "Creativist – UI Design",
+    description: "Figma UI design for landing page",
+    longDescription:
+      "Designed the full desktop and mobile UI in Figma for the Creativist app landing page. Created a clean, modern layout to highlight the app concept and direct users to the download links. The final site was later implemented by the developer using HTML and CSS.",
+    image: creativist,
+    tags: ["Figma", "UI Design", "Responsive Design", "Prototyping"],
+    liveUrl: "https://creativist.app/",
+    githubUrl: "#",
+    color: "from-orange-500/20 to-yellow-500/20"
+  },
+
+
+  {
+    id: 5,
+    title: "Invictus Golf – Interactive Website",
+    description: "Interactive WordPress site with live leaderboard",
+    longDescription:
+      "Developed a fully interactive WordPress website for Invictus Golf with player check-in forms, game selection, and a real-time leaderboard for 'Closest to the Hole' and 'Longest Drive.' Implemented custom PHP logic, MySQL data handling, and automated reporting via Google Sheets. Built the UI with Elementor and custom CSS for a smooth, responsive experience.",
+    image: golf,
+    tags: ["WordPress", "PHP", "MySQL", "Elementor", "Apps Script API"],
+    liveUrl: "https://invictusisgolf.com/form/",
+    githubUrl: "#",
+    color: "from-rose-500/20 to-pink-500/20"
+  },
+
+  {
+    id: 6,
+    title: "Calendly UI Clone",
+    description: "Responsive React landing page",
+    longDescription:
+      "A fully responsive and animated clone of Calendly’s homepage built with React, CSS Modules, and Vite. Recreated layouts, SVGs, animations, and visual interactions to match the original design, focusing on frontend architecture, UI accuracy, and clean component structure. This is a static, frontend-only project with no backend.",
+    image: calendly,
+    tags: ["React", "CSS Modules", "Vite", "Frontend UI", "Animations"],
+    liveUrl: "https://calendly-p9rig3z74-juan-barbosas-projects.vercel.app/",
+    githubUrl: "https://github.com/JuanBarbosaA/Calendly",
+    color: "from-teal-500/20 to-purple-500/20"
+  },
+
+
+  {
+    id: 7,
+    title: "FitMatch",
+    description: "Health & wellness booking platform",
+    longDescription:
+      "A full health and wellness platform that connects users with trainers and nutritionists for appointments, progress tracking, personalized plans, and in-app messaging. Built with a React frontend and a .NET MVC backend, the system includes user and professional dashboards, plan management, and PayPal payment integration for secure subscription and service purchases.",
+    image: fitmatch,
+    tags: ["React", ".NET MVC", "MySQL", "PayPal API", "JavaScript", "CSS"],
+    liveUrl: "#",
+    githubUrl: "https://github.com/JuanBarbosaA/FitMatchMVC",
+    color: "from-purple-500/20 to-pink-500/20"
+  },
+
+
+  {
+    id: 8,
+    title: "Giphy Clone",
+    description: "GIF search & discovery app",
+    longDescription:
+      "A fully functional Giphy-style application that allows users to search, filter, and browse trending GIFs using a fast and responsive interface. Built with modern frontend technologies and integrated with an external GIF API to deliver real-time search results, infinite scroll, and category browsing.",
+    image: giphy,
+    tags: ["JavaScript", "React", "API Integration", "CSS"],
     liveUrl: "#",
     githubUrl: "#",
     color: "from-cyan-500/20 to-blue-500/20"
   },
   {
-    id: 4,
-    title: "Finance Tracker",
-    description: "Personal finance management",
-    longDescription: "Comprehensive finance tracking application with budgeting tools, expense categorization, and investment portfolio monitoring. Includes bank integration and automated insights.",
-    image: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)",
-    tags: ["React", "Python", "Flask", "Plaid API"],
+    id: 9,
+    title: "Dibujo Fácil",
+    description: "Educational platform to learn how to draw step by step",
+    longDescription:
+      "Dibujo Fácil is an interactive educational platform built with React, Tailwind, Node.js, and MongoDB. It allows users to learn how to draw through step-by-step tutorials organized by categories and skill levels. The platform includes an advanced search system, comments, star ratings, achievements, user profiles, and an admin panel to manage tutorials. It features a clean, modern, and fully responsive UI/UX focused on enhancing the user experience.",
+    image: dibujo,
+    tags: ["React", "Node.js", "Tailwind", "MongoDB", "Full Stack"],
     liveUrl: "#",
+    githubUrl: "https://github.com/JuanBarbosaA/DibujoFacil",
+    color: "from-emerald-500/20 to-green-500/20"
+  },
+
+  {
+    id: 10,
+    title: "Goblins – Clash of Clans Landing",
+    description: "Responsive gaming landing page",
+    longDescription:
+      "A fully responsive landing page inspired by Clash of Clans, featuring modern UI design, smooth layouts, and optimized mobile/desktop responsiveness. Built with clean HTML, CSS, and JavaScript to showcase characters, game features, navigation sections, and call-to-action areas. Designed with a strong focus on visual appeal and gaming aesthetics.",
+    image: goblin,
+    tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+    liveUrl: "https://stunning-parfait-335a97.netlify.app/",
+    githubUrl: "#",
+    color: "from-cyan-500/20 to-blue-500/20"
+  },
+
+  {
+    id: 11,
+    title: "GameDev Landing Page",
+    description: "Responsive course landing page",
+    longDescription:
+      "A modern and fully responsive landing page for a Game Development course, built with pure HTML, CSS, and JavaScript. Includes sections for testimonials, course features, student stats, app download links, and a clean UI designed to maximize conversions. Optimized for both mobile and desktop, providing a smooth and professional user experience.",
+    image: game,
+    tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+    liveUrl: "https://mywebsiteyoutube1.netlify.app/",
     githubUrl: "#",
     color: "from-emerald-500/20 to-green-500/20"
   },
+
+
+
+
+
   {
-    id: 5,
-    title: "Creative Portfolio",
-    description: "3D interactive showcase",
-    longDescription: "An immersive 3D portfolio experience featuring WebGL animations, particle systems, and interactive storytelling elements. Designed to push the boundaries of web creativity.",
-    image: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
-    tags: ["Three.js", "GSAP", "WebGL", "Blender"],
-    liveUrl: "#",
-    githubUrl: "#",
-    color: "from-orange-500/20 to-yellow-500/20"
-  },
-  {
-    id: 6,
-    title: "Learning Platform",
-    description: "Interactive education system",
-    longDescription: "Online learning platform with video courses, interactive quizzes, progress tracking, and certificates. Features live sessions and community discussion forums.",
-    image: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
-    tags: ["Vue.js", "Django", "WebRTC", "AWS"],
-    liveUrl: "#",
-    githubUrl: "#",
-    color: "from-purple-500/20 to-pink-500/20"
-  },
-  {
-    id: 7,
-    title: "Health & Fitness",
-    description: "Workout tracking app",
-    longDescription: "Comprehensive fitness application with workout planning, nutrition tracking, and progress analytics. Integrates with wearable devices for real-time health monitoring.",
-    image: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
-    tags: ["React Native", "Firebase", "HealthKit", "Charts"],
-    liveUrl: "#",
-    githubUrl: "#",
-    color: "from-rose-500/20 to-pink-500/20"
-  },
-  {
-    id: 8,
-    title: "Real Estate Platform",
-    description: "Property listing & search",
-    longDescription: "Modern real estate platform with advanced property search, virtual tours, mortgage calculators, and agent matching. Features map-based exploration and neighborhood insights.",
-    image: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    tags: ["Next.js", "Mapbox", "Prisma", "Vercel"],
-    liveUrl: "#",
-    githubUrl: "#",
-    color: "from-indigo-500/20 to-violet-500/20"
-  },
-  {
-    id: 9,
-    title: "Task Management",
-    description: "Team collaboration tool",
-    longDescription: "Powerful project management tool with Kanban boards, Gantt charts, time tracking, and team collaboration features. Includes automation and integrations with popular tools.",
-    image: "linear-gradient(135deg, #5ee7df 0%, #b490ca 100%)",
-    tags: ["React", "Socket.io", "Node.js", "PostgreSQL"],
-    liveUrl: "#",
-    githubUrl: "#",
-    color: "from-teal-500/20 to-purple-500/20"
-  },
-  {
-    id: 10,
+    id: 12,
     title: "Music Streaming",
     description: "Audio platform with playlists",
     longDescription: "Feature-rich music streaming service with personalized recommendations, collaborative playlists, and social sharing. Includes podcast support and high-quality audio streaming.",
@@ -134,14 +193,25 @@ const ProjectCard = ({
     >
       <div className="project-card relative">
         {/* Image area */}
-        <div
-          className="aspect-[4/3] relative overflow-hidden"
-          style={{ background: project.image }}
-        >
-          <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+        <div className="aspect-[4/3] relative overflow-hidden group">
+          {project.image.startsWith("linear-gradient") ? (
+            <div
+              className={`absolute inset-0 transition-all duration-500 group-hover:brightness-80`}
+              style={{ background: project.image }}
+            />
+          ) : (
+            <img
+              src={project.image}
+              alt={project.title}
+              loading="lazy"
+              width="400"
+              height="300"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:brightness-75"
+            />
+          )}
 
-          {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+          {/* Overlay de texto */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <motion.span
               initial={{ scale: 0 }}
               whileHover={{ scale: 1.1 }}
@@ -151,6 +221,7 @@ const ProjectCard = ({
             </motion.span>
           </div>
         </div>
+
 
         {/* Content */}
         <div className="p-6">
@@ -227,10 +298,22 @@ const ProjectModal = ({
         )}
 
         {/* Image */}
-        <div
-          className="h-60 sm:h-72 md:h-80 w-full flex-shrink-0"
-          style={{ background: project.image }}
-        />
+        <div className="h-60 sm:h-72 md:h-80 w-full flex-shrink-0 relative overflow-hidden">
+          {project.image.startsWith("linear-gradient") ? (
+            <div
+              className="absolute inset-0"
+              style={{ background: project.image }}
+            />
+          ) : (
+            <img
+              src={project.image}
+              alt={project.title}
+              width="1200"
+              height="600"
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+          )}
+        </div>
 
         {/* Scrollable content */}
         <div className="p-8 overflow-y-auto flex-1 relative">
@@ -264,7 +347,7 @@ const ProjectModal = ({
               <ExternalLink className="w-4 h-4" />
               Live Demo
             </motion.a>
-            <motion.a
+            {project.githubUrl == "#" ? null : (<motion.a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -274,7 +357,7 @@ const ProjectModal = ({
             >
               <Github className="w-4 h-4" />
               Source Code
-            </motion.a>
+            </motion.a>)}
           </div>
         </div>
       </motion.div>
@@ -287,6 +370,7 @@ const PortfolioSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [selectedProject, setSelectedProject] = useState(null);
+  const [visibleProjects, setVisibleProjects] = useState(9);
 
   const currentIndex = selectedProject ? projects.findIndex(p => p.id === selectedProject.id) : -1;
 
@@ -300,6 +384,10 @@ const PortfolioSection = () => {
     if (currentIndex < projects.length - 1) {
       setSelectedProject(projects[currentIndex + 1]);
     }
+  };
+
+  const handleLoadMore = () => {
+    setVisibleProjects(prev => prev + 6);
   };
 
   return (
@@ -338,17 +426,35 @@ const PortfolioSection = () => {
         </div>
 
         {/* Projects grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {projects.slice(0, visibleProjects).map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
               index={index}
+
               isInView={isInView}
               onClick={() => setSelectedProject(project)}
             />
           ))}
         </div>
+
+        {/* Load More Button */}
+        {visibleProjects < projects.length && (
+          <div className="flex justify-center">
+            <motion.button
+              onClick={handleLoadMore}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+            >
+              <span className="text-sm font-medium">Load More Projects</span>
+              <div className="p-3 rounded-full glass group-hover:bg-primary/10 transition-colors">
+                <ChevronDown className="w-6 h-6 animate-bounce" />
+              </div>
+            </motion.button>
+          </div>
+        )}
       </div>
 
       {/* Modal */}
@@ -369,3 +475,7 @@ const PortfolioSection = () => {
 };
 
 export default PortfolioSection;
+
+
+
+

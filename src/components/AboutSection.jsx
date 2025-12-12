@@ -2,17 +2,56 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Code2, Palette, Sparkles, Zap } from "lucide-react";
 import photo from "../assets/images/photo.png";
+import { useState, useEffect } from "react";
+
 
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [lang, setLang] = useState("en");
 
-  const highlights = [
-    { icon: Code2, title: "Clean Code", desc: "Writing maintainable, scalable code" },
-    { icon: Palette, title: "UI/UX Design", desc: "Creating beautiful interfaces" },
-    { icon: Zap, title: "Performance", desc: "Optimizing for speed & efficiency" },
-    { icon: Sparkles, title: "Innovation", desc: "Exploring new technologies" },
-  ];
+  useEffect(() => {
+    const userLang = navigator.language || navigator.userLanguage;
+    if (userLang.startsWith("es")) setLang("es");
+    else setLang("en");
+  }, []);
+
+  const translations = {
+    en: {
+      aboutMe: "About Me",
+      title: "Crafting Digital",
+      subtitle: "Experiences",
+      years: "4+ Years",
+      projects: "50+ Projects",
+      description1: "I'm a passionate frontend developer with over 4 years of experience building modern web applications. I specialize in React, TypeScript, and creating beautiful user interfaces that are both functional and aesthetically pleasing.",
+      description2: "When I'm not coding, you'll find me exploring new design trends, contributing to open-source projects, or sharing knowledge with the developer community.",
+      highlights: [
+        { icon: Code2, title: "Clean Code", desc: "Writing maintainable, scalable code" },
+        { icon: Palette, title: "UI/UX Design", desc: "Creating beautiful interfaces" },
+        { icon: Zap, title: "Performance", desc: "Optimizing for speed & efficiency" },
+        { icon: Sparkles, title: "Innovation", desc: "Exploring new technologies" },
+      ],
+
+    },
+    es: {
+      aboutMe: "Sobre Mí",
+      title: "Creando Experiencias",
+      subtitle: "Digitales",
+      years: "4+ Años",
+      projects: "50+ Proyectos",
+      description1: "Soy un desarrollador frontend apasionado con más de 4 años de experiencia construyendo aplicaciones web modernas. Me especializo en React, TypeScript y en crear interfaces hermosas que sean funcionales y atractivas.",
+      description2: "Cuando no estoy programando, me encontrarás explorando nuevas tendencias de diseño, contribuyendo a proyectos de código abierto o compartiendo conocimiento con la comunidad de desarrolladores.",
+      highlights: [
+        { icon: Code2, title: "Código Limpio", desc: "Escribiendo código mantenible y escalable" },
+        { icon: Palette, title: "Diseño UI/UX", desc: "Creando interfaces hermosas" },
+        { icon: Zap, title: "Rendimiento", desc: "Optimizando para velocidad y eficiencia" },
+        { icon: Sparkles, title: "Innovación", desc: "Explorando nuevas tecnologías" },
+      ],
+
+
+    },
+  };
+
 
   return (
     <section id="about" className="section-padding relative overflow-hidden" ref={ref}>
@@ -59,14 +98,14 @@ const AboutSection = () => {
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
               >
-                <span className="text-primary font-semibold">4+ Years</span>
+                <span className="text-primary font-semibold">{translations[lang].years}</span>
               </motion.div>
               <motion.div
                 className="absolute -left-4 bottom-1/4 px-4 py-2 glass rounded-xl"
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 5, repeat: Infinity }}
               >
-                <span className="text-accent font-semibold">50+ Projects</span>
+                <span className="text-accent font-semibold">{translations[lang].projects}</span>
               </motion.div>
             </div>
           </motion.div>
@@ -83,7 +122,7 @@ const AboutSection = () => {
               transition={{ duration: 0.5 }}
               className="text-primary font-medium mb-4 block"
             >
-              About Me
+              {translations[lang].aboutMe}
             </motion.span>
 
             <motion.h2
@@ -92,8 +131,8 @@ const AboutSection = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl md:text-5xl font-display font-bold mb-6"
             >
-              Crafting Digital
-              <span className="text-gradient"> Experiences</span>
+              {translations[lang].title}
+              <span className="text-gradient"> {translations[lang].subtitle}</span>
             </motion.h2>
 
             <motion.p
@@ -102,10 +141,7 @@ const AboutSection = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-muted-foreground text-lg mb-6 leading-relaxed"
             >
-              I'm a passionate frontend developer with over 5 years of experience
-              building modern web applications. I specialize in React, TypeScript,
-              and creating beautiful user interfaces that are both functional and
-              aesthetically pleasing.
+              {translations[lang].description1}
             </motion.p>
 
             <motion.p
@@ -114,16 +150,14 @@ const AboutSection = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-muted-foreground mb-8 leading-relaxed"
             >
-              When I'm not coding, you'll find me exploring new design trends,
-              contributing to open-source projects, or sharing knowledge with
-              the developer community.
+              {translations[lang].description2}
             </motion.p>
 
             {/* Highlight cards */}
             <div className="grid grid-cols-2 gap-4">
-              {highlights.map((item, index) => (
+              {translations[lang].highlights.map((item, index) => (
                 <motion.div
-                  key={item.title}
+                  key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}

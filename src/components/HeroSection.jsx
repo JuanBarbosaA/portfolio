@@ -27,6 +27,8 @@ const TypeWriter = ({ text, delay = 100 }) => {
   );
 };
 
+
+
 const FloatingOrb = ({ className, size, delay }) => (
   <motion.div
     className={`absolute rounded-full blur-3xl ${className}`}
@@ -45,8 +47,37 @@ const FloatingOrb = ({ className, size, delay }) => (
   />
 );
 
+
+
+
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [lang, setLang] = useState("en");
+
+  useEffect(() => {
+    const userLang = navigator.language || navigator.userLanguage;
+    if (userLang.startsWith("es")) setLang("es");
+    else setLang("en");
+  }, []);
+  const translations = {
+    en: {
+      role: "Frontend Developer & UI/UX Enthusiast",
+      intro: "Hi, I'm ",
+      description:
+        "I craft beautiful, interactive digital experiences with modern technologies. Passionate about creating pixel-perfect interfaces that delight users.",
+      viewWork: "View My Work",
+      getInTouch: "Get in Touch",
+    },
+    es: {
+      role: "Desarrollador Frontend & Entusiasta UI/UX",
+      intro: "Hola, soy ",
+      description:
+        "Creo experiencias digitales hermosas e interactivas usando tecnologías modernas. Apasionado por interfaces precisas que encantan a los usuarios.",
+      viewWork: "Ver mi Trabajo",
+      getInTouch: "Contáctame",
+    },
+  };
+
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -114,7 +145,7 @@ const HeroSection = () => {
           className="mb-6"
         >
           <span className="inline-block px-4 py-2 text-sm font-medium text-primary border border-primary/30 rounded-full glass">
-            Frontend Developer & UI/UX Enthusiast
+            {translations[lang].role}
           </span>
         </motion.div>
 
@@ -124,7 +155,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 tracking-tight"
         >
-          <span className="text-foreground">Hi, I'm </span>
+          <span className="text-foreground">{translations[lang].intro}</span>
           <span className="text-gradient">
             <TypeWriter text="Juan Barbosa" delay={120} />
           </span>
@@ -136,8 +167,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          I craft beautiful, interactive digital experiences with modern technologies.
-          Passionate about creating pixel-perfect interfaces that delight users.
+          {translations[lang].description}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -156,7 +186,7 @@ const HeroSection = () => {
             <span className="absolute inset-0 bg-gradient-to-r from-primary to-accent transition-transform group-hover:scale-110" />
             <span className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
             <span className="relative z-10 flex items-center gap-2">
-              View My Work
+              {translations[lang].viewWork}
               <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
             </span>
           </motion.a>
@@ -167,7 +197,7 @@ const HeroSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Get in Touch
+            {translations[lang].getInTouch}
           </motion.a>
         </motion.div>
 
