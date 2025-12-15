@@ -88,7 +88,7 @@ const projects = [
       "A fully responsive and animated clone of Calendly’s homepage built with React, CSS Modules, and Vite. Recreated layouts, SVGs, animations, and visual interactions to match the original design, focusing on frontend architecture, UI accuracy, and clean component structure. This is a static, frontend-only project with no backend.",
     image: calendly,
     tags: ["React", "CSS Modules", "Vite", "Frontend UI", "Animations"],
-    liveUrl: "https://calendly-p9rig3z74-juan-barbosas-projects.vercel.app/",
+    liveUrl: "https://juanbarbosa.vercel.app/",
     githubUrl: "https://github.com/JuanBarbosaA/Calendly",
     color: "from-teal-500/20 to-purple-500/20"
   },
