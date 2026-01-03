@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Code2, Palette, Sparkles, Zap } from "lucide-react";
-import photo from "../assets/images/photo.png";
+import photo from "../assets/images/photo.webp";
 import { useState, useEffect } from "react";
 
 
